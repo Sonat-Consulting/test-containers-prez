@@ -7,44 +7,21 @@ transition: fade
 ---
 # Testcontainers
 
-Presentasjon Javabin Bergen 19/9-2024
-Sondre Eikanger Kvalø - Sonat Consulting Bergen
+Presentasjon fagdag 25/10-2024
+Sondre Eikanger Kvalø
 @zapodot https://github.com/zapodot
 
 ---
 <!-- 
 header: 'Testcontainers'
-footer: 'Javabin Bergen 19/9-2024'
+footer: 'Fagdag SCB 25/10-2024'
 -->
 
-# Plan for dagen
- 1. Bakgrunn
+# Plan for timen
+ 1. Om testing
  1. Hvordan gjorde vi testing før?
- 1. Fordeler og ulemper
- 1. Testcontainers 101 med eksempler
+ 1. Testcontainers
  1. Konklusjon
-
----
-### Hva er en container?
-[![width:1000](assets/oci.png)](https://github.com/opencontainers/image-spec/releases/download/v1.1.0/oci-image-spec-v1.1.0.pdf)
-Kilde: *Open Container Initiative Image spec v 1.1.0*
-<!--
-OCI - specen definerer et image som summen av lag, index og config. Et container image skal kunne kjøre isolert og skal kun ha tilgang til bibliotek og kommandoer som er lagt inn i imaget 
--->
-
----
-![width:1000](assets/docker-architecture.png)
-Kilde: *[Docker overview]
-(https://docs.docker.com/get-started/docker-overview/)*
-
-<!--
-Docker er den mest kjente container runtime brukt lokalt på utviklermaskiner og servere. Støtter også OCI. Docker Desktop er propritært mens selve dockerd er opensource. Et OpenSource alternativ er Podman Desktop 
-Kubernetes bygger også på bruk av container images definert i henhold til OCI-standarden 
- -->
-
----
-![image](https://testcontainers.com/getting-started/images/test-workflow.png)
-
 
 ---
 
@@ -66,6 +43,7 @@ Det finnes selvsagt mange andre typer tester f.eks sikkerhetstesting, ende-til-e
 - Testet *ikke* integrasjonskode før produksjon
 - Testet mot faktisk test/produksjonsmiljø
 - Kjørte mocks/stubs som lot deg dekke en del av behovet (f.eks H2Database i kompabilitetsmodus)
+
 ---
 ### Eksempel: _enhetstest_
 ```java
@@ -97,6 +75,22 @@ Dersom det er for mange avhengigheter som må mockes er det på tide å tenke p�
 Om vi bare kjører integrasjonstester er det lett å glemme dette aspektet
  -->
 ---
+![image](https://testcontainers.com/getting-started/images/test-workflow.png)
+
+---
+### Testcontainers
+- Testcontainer gjør det lett å integrere bruk av containere til testformål
+
+---
+### Hva er en container?
+[![width:1000](assets/oci.png)](https://github.com/opencontainers/image-spec/releases/download/v1.1.0/oci-image-spec-v1.1.0.pdf)
+Kilde: *Open Container Initiative Image spec v 1.1.0*
+<!--
+OCI - specen definerer et image som summen av lag, index og config. Et container image skal kunne kjøre isolert og skal kun ha tilgang til bibliotek og kommandoer som er lagt inn i imaget 
+-->
+
+
+---
 ### Testcontainers 
 >Testing med _Testcontainers_ er å anse som _integrasjonstester_ og fokuset bør først og fremst være på å sjekke at integrasjonskoden virker mot de tredjeparts avhengighetene vi har i produksjon
 
@@ -121,6 +115,7 @@ Om vi bare kjører integrasjonstester er det lett å glemme dette aspektet
     - .NET
     - Go
     - Node.js
+    - m.fl
 
 <!-- Siden Docker inc har kjøpt opp rettighetene til testcontainers er det rimelig å anta at de kommer til å bruke Docker Build Cloud på sikt -->
 ---

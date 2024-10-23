@@ -1,2 +1,2 @@
 # Test containers 
-## Presentasjon og eksempler brukt til innlegg Javabin Bergen 19/9-2024
+## Presentasjon og eksempler brukt til fagdag Sonat Consulting Bergen 25/10-2024
