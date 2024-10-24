@@ -1,13 +1,15 @@
 using System.Data.Common;
 using EvolveDb;
-using NLog;
+using EvolveDb.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace TestcontainersExample.Persistence.Schema;
 
 public class Migrator
 {
-    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    private static readonly ILogger Logger = Logging.LoggerFactory().CreateLogger<Migrator>();
     private readonly DbDataSource _dataSource;
+
     public Migrator(DbDataSource dataSource)
     {
         this._dataSource = dataSource;
@@ -17,17 +19,19 @@ public class Migrator
     {
         try
         {
-            Logger.Info("Migrating database...");
+            Logger.LogInformation("Migrating database...");
             using var connection = _dataSource.OpenConnection();
-            var evolve = new Evolve(connection, msg => Logger.Debug(msg))     {
+            var evolve = new Evolve(connection, msg => Logger.LogDebug(msg))
+            {
                 Locations = ["migrations"],
-                IsEraseDisabled = true
+                IsEraseDisabled = true,
+                Command = CommandOptions.Migrate
             };
             evolve.Migrate();
         }
         catch (Exception e)
         {
-            Logger.Fatal(e, "Failed to migrate database");
+            Logger.LogCritical(e, "Failed to migrate database");
         }
     }
 }
