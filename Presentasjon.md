@@ -245,6 +245,7 @@ try (
 ### Ulemper med å ha tester som bruker testcontainers
 - Tar lengre tid å kjøre testene
 - Lett for at man ungår å refaktorere koden som integrerer mot tredjepart
+- Må ha mulighet for å kjøre containere også i CI-miljø
 
 ---
 ### Konklusjon
