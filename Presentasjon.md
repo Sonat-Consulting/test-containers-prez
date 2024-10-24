@@ -10,6 +10,7 @@ transition: fade
 Presentasjon fagdag 25/10-2024
 Sondre Eikanger Kvalø
 @zapodot https://github.com/zapodot
+![w:200 h:200](assets/qr-code.png)
 
 ---
 <!-- 
@@ -74,12 +75,15 @@ class RoleReadRepositoryTest {
 Dersom det er for mange avhengigheter som må mockes er det på tide å tenke på å refaktorere koden for å gjøre hver funksjon eller klasse lettere å teste.
 Om vi bare kjører integrasjonstester er det lett å glemme dette aspektet
  -->
----
-![image](https://testcontainers.com/getting-started/images/test-workflow.png)
 
 ---
 ### Testcontainers
-- Testcontainer gjør det lett å integrere bruk av containere til testformål
+- Testcontainers gjør det enklere å kjøre containere for å teste som en del av standard bygging
+- Kan kjøre en hvilken som helst container, men har egne moduler for mange ofte brukte containere (DBMS, meldingsbrokere etc) 
+<!-- Finnes en haug med standardmoduler på https://testcontainers.com/modules/ -->
+---
+![image](https://testcontainers.com/getting-started/images/test-workflow.png)
+
 
 ---
 ### Hva er en container?
@@ -187,7 +191,27 @@ class UserReadRepositoryTest : StringSpec({
 })
 
 ```
+---
+### Eksempel: C# med xUnit 
+```c#
+public class PostgresDatabaseFixture : IAsyncLifetime
+{
+    private readonly PostgreSqlContainer _container =
+        new PostgreSqlBuilder()
+            .WithImage("postgres:12.20-alpine")
+            .Build();
 
+    public NpgsqlDataSource DataSource => new DataSourceFactory(_container.GetConnectionString()).Create();
+
+    public Task InitializeAsync()
+    {
+        return _container.StartAsync().ContinueWith(t => RunMigrations());
+    }
+    
+    public Task DisposeAsync()
+        => _container.DisposeAsync().AsTask();
+}
+```
 ---
 
 ### Koble sammen containere (code smell?)
@@ -227,3 +251,8 @@ try (
 - Tester som er avhengig av en tredjepart er ikke enhetstester men integrasjonstester
 - Kan velge å skille ut testene som krever containere
 - Enhetstester er fremdeles viktig for å sikre at man opprettholder så løs kobling som mulig
+
+---
+# Takk for meg :-)
+![bg vertical left w:300 h:300](assets/evaluering-qr-code.png)
+
