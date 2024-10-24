@@ -10,7 +10,7 @@ transition: fade
 Presentasjon fagdag 25/10-2024
 Sondre Eikanger Kvalø
 @zapodot https://github.com/zapodot
-![w:200 h:200](assets/qr-code.png)
+![w:200 h:200 drop-shadow](assets/qr-code.png)
 
 ---
 <!-- 
@@ -254,5 +254,5 @@ try (
 
 ---
 # Takk for meg :-)
-![bg vertical left w:300 h:300](assets/evaluering-qr-code.png)
+![bg vertical left w:300 h:300 drop-shadow](assets/evaluering-qr-code.png)
 
